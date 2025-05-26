@@ -9,6 +9,8 @@ services:
     container_name: laravel-app
     restart: unless-stopped
     working_dir: /var/www/html
+    ports:
+      - "6001:6001"
     volumes:
       - .:/var/www/html  # Mount whole project
       - vendor:/var/www/html/vendor # Except vendor
@@ -54,17 +56,17 @@ services:
     networks:
       - laravel
   
-  queue:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile
-    container_name: laravel-queue
-    command: php artisan queue:work --sleep=3 --tries=3
-    depends_on:
-      - redis
-      - app
-    networks:
-      - laravel
+  # queue:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/Dockerfile
+  #   container_name: laravel-queue
+  #   command: php artisan queue:work --sleep=3 --tries=3
+  #   depends_on:
+  #     - redis
+  #     - app
+  #   networks:
+  #     - laravel
 
 volumes:
   dbdata:
