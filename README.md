@@ -45,7 +45,7 @@ stdout_logfile=/var/log/websockets.out.log
 ```
 
 ### Set Up Environment Variables
-Add the following to `environment/.env` to configure the Pusher-compatible WebSocket driver:
+Add the following to `environment/.env.local` to configure the Pusher-compatible WebSocket driver:
 ```ini
 BROADCAST_DRIVER=pusher
 
@@ -61,7 +61,7 @@ PUSHER_PORT=6001
 ### Build and Run Containers
 Build and start the Docker containers:
 ```bash
-docker-compose --env-file environment/.env up --build
+docker-compose --env-file environment/.env.local up --build
 ```
 - if not worked try this command again
 
@@ -399,7 +399,7 @@ jobs:
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Copy .env file
-        run: cp environment/.env .env
+        run: cp environment/.env.local .env
 
       - name: Generate application key
         run: php artisan key:generate
@@ -472,3 +472,8 @@ You now have:
 - Frontend integration with Laravel Echo and Pusher.js.
 - Automated unit tests verifying event dispatching and broadcasting.
 - A GitHub Actions CI pipeline to ensure code quality.
+
+
+----------
+Grok >>>
+Add 200 M+ users for auth including authorizing channel

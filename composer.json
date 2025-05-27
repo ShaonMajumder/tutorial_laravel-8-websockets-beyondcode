@@ -12,8 +12,10 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
+        "laravel/telescope": "*",
         "laravel/tinker": "^2.5",
-        "pusher/pusher-php-server": "^3.0"
+        "pusher/pusher-php-server": "^3.0",
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

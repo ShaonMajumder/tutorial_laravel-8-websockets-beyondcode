@@ -30,6 +30,9 @@ COPY . .
 COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY ./docker/supervisord.conf /etc/supervisord.conf
 
+RUN if [ -n "$APP_ENV_FILE" ] && [ -f environment/$APP_ENV_FILE ]; then \
+    chmod 644 environment/$APP_ENV_FILE; \
+    fi
 
 RUN [ -d /var/www/html/storage ] && chown -R www-data:www-data /var/www/html/storage || echo "storage not found" && \
     [ -d /var/www/html/bootstrap/cache ] && chown -R www-data:www-data /var/www/html/bootstrap/cache || echo "cache not found" && \
@@ -40,9 +43,6 @@ RUN [ -d /var/www/html/storage ] && chown -R www-data:www-data /var/www/html/sto
 # 0.484
 # 0.484   git config --global --add safe.directory /var/www/html
 
-# RUN composer install --no-interaction --prefer-dist --optimize-autoloader \
-#     && composer dump-autoload -o \
-#     && php artisan package:discover
 RUN if [ -f artisan ] && [ -f composer.json ]; then \
     composer install --no-interaction --prefer-dist --optimize-autoloader && \
     composer dump-autoload -o && \
@@ -51,10 +51,6 @@ RUN if [ -f artisan ] && [ -f composer.json ]; then \
     echo "Laravel not found. Skipping composer install and artisan commands."; \
     fi
 
-
-# RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-# RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
-# RUN php artisan key:generate
 RUN if [ -f artisan ]; then \
     chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && \
     chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache && \

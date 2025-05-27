@@ -70,11 +70,20 @@ return [
             'secret' => env('PUSHER_APP_SECRET'),
             'path' => env('PUSHER_APP_PATH'),
             'capacity' => null,
-            'enable_client_messages' => false,
+            'enable_client_messages' => false, // false ??? true - is it secure
             'enable_statistics' => true,
-            'allowed_origins' => [
-                // env('LARAVEL_WEBSOCKETS_DOMAIN'),
+            // 'allowed_origins' => explode(',', env('WEBSOCKETS_ALLOWED_ORIGINS', [])),
+
+            'verify_peer' => false, // setting disables SSL peer verification, which is insecure for production.
+            'auth' => [
+                'enabled' => true,
+                'driver' => 'jwt', // Enable JWT auth
+                'jwt' => [
+                    'secret' => env('JWT_SECRET'),
+                    'algo' => 'HS256',
+                ],
             ],
+            
         ],
     ],
 

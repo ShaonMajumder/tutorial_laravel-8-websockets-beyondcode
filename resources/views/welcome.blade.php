@@ -130,9 +130,14 @@
         </div>
         <script src="{{ asset('js/app.js') }}"></script>
         <script>
-            window.Echo.channel('message-box').listen('NewMessage', (data) => {
-                console.log(data)
-            })
+            // window.Echo.channel('message-box').listen('NewMessage', (data) => {
+            //     console.log(data)
+            // })
+            
+            // window.Echo.private('message-box.2')
+            //     .listen('NewMessage', (data) => {
+            //         console.log('Received:', data);
+            //     });
         </script>
     </body>
 </html>

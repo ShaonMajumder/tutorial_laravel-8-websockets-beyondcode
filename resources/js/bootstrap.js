@@ -24,9 +24,11 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    forceTLS: false,
+    forceTLS: false, // process.env.PUSHER_FORCE_TLS === 'true', // env('PUSHER_SCHEME', 'https') === 'https'
     wsHost: window.location.hostname,
     wsPort: process.env.PUSHER_PORT | '6001',
     disableStats: true,
     enabledTransports: ['ws', 'wss'],
+    withCredentials: true,
+    // jwt cookie is sent with credentials: 'include'
 });

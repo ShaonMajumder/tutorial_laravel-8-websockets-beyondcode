@@ -16,6 +16,7 @@ class NewMessage implements ShouldBroadcastNow
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $sender_id;
+    public $receiver_id;
     public $message;
 
     /**
@@ -23,9 +24,10 @@ class NewMessage implements ShouldBroadcastNow
      *
      * @return void
      */
-    public function __construct($sender_id, $message)
+    public function __construct($sender_id, $receiver_id, $message)
     {
         $this->sender_id = $sender_id;
+        $this->receiver_id = $receiver_id;
         $this->message = $message;
     }
 
@@ -36,13 +38,14 @@ class NewMessage implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new Channel('message-box');
+        return new PrivateChannel('message-box.' . $this->receiver_id);
     }
 
     public function broadcastWith()
     {
         return [
             'sender_id' => $this->sender_id,
+            'receiver_id' => $this->receiver_id,
             'message' => $this->message,
         ];
     }

@@ -14,6 +14,9 @@ services:
     volumes:
       - .:/var/www/html  # Mount whole project
       - vendor:/var/www/html/vendor # Except vendor
+    environment:
+      - APP_ENV=${APP_ENV}
+      - APP_ENV_FILE=.env.${APP_ENV}
     networks:
       - laravel
 
