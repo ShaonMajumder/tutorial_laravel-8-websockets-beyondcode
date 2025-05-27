@@ -1,5 +1,5 @@
 # 🧪 Laravel 8 WebSocket Broadcasting with beyondcode/laravel-websockets
-
+![Cover](screenshots/cover.jpg)
 This tutorial guides you through setting up real-time WebSocket broadcasting in a Laravel 8 application using the beyondcode/laravel-websockets package. By the end, you’ll have a fully functional WebSocket server, event broadcasting, and automated tests running in a Dockerized environment.
 
 ## 🚀 1. Introduction & Advantages
